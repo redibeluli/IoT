@@ -1,3 +1,3 @@
 # Pong
 
-This code will contain everything needed for my ping pong scoreboard 
+This was changed in the clone
