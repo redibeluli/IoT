@@ -35,14 +35,14 @@
 
 
 
-  #player1{
-    position: relative;
-    text-align: right;
+#player1{
+  position: relative;
+  text-align: right;
 
-    width: 65%;
+  width: 65%;
 
-    padding: 0px;
-  }
+  padding: 0px;
+}
 
 
 #setName {
@@ -88,7 +88,6 @@ opacity: 1;
 }
 
 
-
 #password1{
   width: 180px;
   height: 30px;
@@ -110,10 +109,10 @@ opacity: 1;
   width: 250px;
   height: 100px;
   top: 75px;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   padding: 20px;
   background-color: #b00;
   display: none;
@@ -122,8 +121,6 @@ opacity: 1;
   opacity: .9;
 
 }
-
-
 
 
 #nameBtn2{
@@ -174,16 +171,14 @@ font-size: 48px;
 }
 
 
-  #game1{
-    font-size: 5rem;
-    font-weight: bold;
-    width: 30%;
-    
-
-  }
+#game1{
+  font-size: 5rem;
+  font-weight: bold;
+  width: 30%;
   
 
-
+}
+  
 
 #score1{
   
@@ -192,10 +187,8 @@ font-size: 48px;
   font-weight: bold;
 
 
-  
 
 }
-
 
 #outer_circle1{
 
@@ -224,17 +217,17 @@ bottom: 16px;
 }
 
 
-  #top2 {
-    display: flex;
-  }
+#top2 {
+  display: flex;
+}
 
-  #game2{
-    font-size: 5rem;
-    width: 30%;
-    font-weight: bold;
+#game2{
+  font-size: 5rem;
+  width: 30%;
+  font-weight: bold;
 
 
-  }
+}
 
 #player2{
   position: relative;
@@ -299,26 +292,26 @@ background: #b00;
 }
 
 #button {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    background-color: #00b;
-    background-repeat:no-repeat;
-    border-radius: 30px;
-    border: 2px solid white;
-    height: 50px;
-    width: 200px;
-    cursor:pointer;
-    overflow: hidden;
-    outline-color: white;
-    text-align: center;
-    top: 280px;
-    z-index: 1; 
-    background-image: linear-gradient(to right, blue, red);
-    display: none;
-    
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  background-color: #00b;
+  background-repeat:no-repeat;
+  border-radius: 30px;
+  border: 2px solid white;
+  height: 50px;
+  width: 200px;
+  cursor:pointer;
+  overflow: hidden;
+  outline-color: white;
+  text-align: center;
+  top: 280px;
+  z-index: 1; 
+  background-image: linear-gradient(to right, blue, red);
+  display: none;
+  
 }
 
 #button:hover {
@@ -394,9 +387,6 @@ text-align: center;
 
 }
 
-
-
-
 /* The popup form - hidden by default */
 .form-popup {
 
@@ -419,8 +409,6 @@ text-align: center;
   padding: 15px;
   background-color: white;
   border-radius: 5px;
-
-
 
 }
 
@@ -615,7 +603,6 @@ background-color: #7abae8;
 border: solid white 3px;
 border-radius: 10px;
 color: black;
-
 
 }
 
