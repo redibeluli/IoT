@@ -374,428 +374,355 @@ var game1 = "0";
 var game2 = "0";           
 
 
-function showValue(e)
-                {
+function showValue(e){
             
-
-           
-
-            //console.log("Event Data Recieved");
+  //console.log("Event Data Recieved");
+                                 
+  console.log(e.data);
               
+  var started;
 
 
-                       
-                        
-            console.log(e.data);
-                        
-            var started;
-
-
-            var substr = e.data.substring(0,2);
-           
-            var score1_old = score1;
-            var score2_old = score2;
-            
-            if(substr == 'fi'){
-              score1 = e.data.substring(2);
-              
-            }
-
-            if(substr == 'se')            
-                score2 = e.data.substring(2);
-          
-
-
-            if(substr == 'AA')
-              game1 = e.data.substring(2);
-
-            if(substr == 'BB')
-              game2 = e.data.substring(2);
-
-
-            if(parseInt(score1,10) > parseInt(score1_old,10))
-              audio.play();
-
-            if(parseInt(score2,10) > parseInt(score2_old,10))
-              audio2.play();
-
-           if(e.data == 'insert'){
-              
-                if(user.side == 'left'){
-                  A_won += parseInt(user.games_won,10);            
-                  B_won += parseInt(user2.games_won,10);
-                }
-                else{
-                  B_won += parseInt(user.games_won,10);            
-                  A_won += parseInt(user2.games_won,10);
-                }
-           }
-
-
-            
-            document.getElementById("score1").innerHTML= score1;
-
-            document.getElementById("score2").innerHTML= score2;
-
-            if(user.side == 'left'){
-              document.getElementById("game1").innerHTML= A_won;
-              document.getElementById("game2").innerHTML= B_won;
-            }
-            else{
-              document.getElementById("game2").innerHTML= A_won;
-              document.getElementById("game1").innerHTML= B_won; 
-            }          
+  var substr = e.data.substring(0,2);
  
+  var score1_old = score1;
+  var score2_old = score2;
+  
+  if(substr == 'fi'){
+    score1 = e.data.substring(2);
+    
+  }
 
+  if(substr == 'se')            
+      score2 = e.data.substring(2);
 
-           
-            
-            var circle=document.getElementById('circle');
-            var circle2=document.getElementById('circle2');
-
-             if(substr == 'A'){
-              circle.style.background = '#fff';
-              circle2.style.background = '#b00';
-            }
-             else if(substr == 'B'){
-              circle.style.background = '#00b';
-              circle2.style.background = '#fff';
-
-            }
-
-            var letA=document.getElementById('letA');
-          
-
-            if( e.data == 'letA'){
-              letA.style.display = 'inline';
-              audio3.play();
-            }
-            else if(e.data == 'noletA'){
-             // console.log("no let should display!")
-              letA.style.display = 'none';
-            }
-
-            var letB=document.getElementById('letB');
-          
-
-            if( e.data == 'letB'){
-              document.getElementById("letB").innerHTML= 'LET';
-              letB.style.display = 'block';
-              audio3.play();
-            }
-            else if(e.data == 'noletB'){
-             // console.log("no let should display!")
-              letB.style.display = 'none';
-            }
-
-            
-            var statsA=document.getElementById('statsA');           
-
-            if(e.data == 'displayStatsA'){
-              button.style.display = 'block';
-              setTimeout(function(){ audio4.play(); }, 2000);
-              
-            }
-
-            if(e.data == 'mercy'){
-
-              setTimeout(function(){ audio8.play(); }, 1500);
-            }
-
-            if(e.data == 'switch'){
-              fliplayers();
-            }
-
-            if(e.data == "logged in" && user.logged_in != "yes" && user2.logged_in != "yes"){
-              session_logged = true;
-              hideSettings();
-            }
-         
-
-            if(e.data.substring(0,3) == 'gwA'){
-              user.games_won = e.data.substring(3);
-              //console.log(user.games_won);
-
-            }
-            if(e.data.substring(0,3) == 'glA'){
-              user.games_lost = e.data.substring(3);
-              //console.log(user.games_lost);
-
-            }
-
-
-            if(e.data.substring(0,3) == 'AcA'){
-              user.Aces = e.data.substring(3);
-             // console.log(user.Aces);
-
-            }
-
-
-            if(e.data.substring(0,3) == 'tpA'){
-              user.total_points = e.data.substring(3);
-              user2.total_points_lost = e.data.substring(3);
-            }
 
-            if(e.data.substring(0,4) == 'fltA'){
-              user.serve_faults = e.data.substring(4);
-              //console.log(user.serve_faults);
-            }
 
-            if(e.data.substring(0,4) == 'gplA'){
-              user.game_points_lost = e.data.substring(4);
-             // console.log(user.game_points_lost);
-            }
+  if(substr == 'AA')
+    game1 = e.data.substring(2);
 
-            if(e.data.substring(0,4) == 'gpwA'){
-              user.game_points_won = e.data.substring(4);
-              //console.log(user.game_points_lost);
-            }
+  if(substr == 'BB')
+    game2 = e.data.substring(2);
 
-            if(e.data.substring(0,3) == 'AbA'){
-              user.air_balls = e.data.substring(3);
-              //console.log(user.air_balls);
-            }
-            
-            if(e.data.substring(0,2) == 'nA'){
-              user.netpoints = e.data.substring(2);
-             // console.log(user.netpoints);
-              //sessionStorage.myValue1 = 'Netpoints: ' + e.data.substring(2);
-            }
-
-            if(e.data.substring(0,2) == 'sA'){
-              user.serve_pts =  e.data.substring(2);
-              //console.log(user.serve_pts);
-              //sessionStorage.myValue2 = 'Points from serve: ' + e.data.substring(2) + '%';
-
-            }
-
-            if(e.data.substring(0,3) == 'fsA'){
-              user.lost_serve_pts  = e.data.substring(3);
-             // sessionStorage.myValue3 = 'Points lost recieving serve: ' + e.data.substring(3) + '%';
-            }
-            
-
-            if(e.data.substring(0,3) == 'atA'){
-              user.passivity = e.data.substring(3);
-              console.log(user.passivity)
-              //sessionStorage.myValue4 = 'Airtime Per Return: ' + e.data.substring(3) + ' Seconds';
-            }
-
-            //if(e.data.substring(0,3) == 'lRA'){
-             //user.longest? = e.data.substring(3);
-              //sessionStorage.myValue5 = 'Longest Rally: ' + e.data.substring(3);
-            //}
-
-            if(e.data.substring(0,3) == '2nA'){
-              user.Snd_ball_pts = e.data.substring(3);
-              //sessionStorage.myValue6 = '2nd Ball Points: ' + e.data.substring(3) + '%';
-            }
-
-            //if(e.data.substring(0,3) == '2lA'){
-              //document.getElementById("2nd_lost_ptsA").innerHTML= '2nd Ball lost Points:    ' + e.data.substring(3) + '%';
-              //sessionStorage.myValue7 = '2nd Ball lost Points: ' + e.data.substring(3) + '%';
-            //}
-
-            if(e.data.substring(0,3) == '3rA'){
-              user.Trd_ball_pts =  e.data.substring(3);
-              //sessionStorage.myValue8 = '3rd Ball Points: ' + e.data.substring(3) + '%';
-            }
-
-
-
-           // if(e.data.substring(0,3) == '3lA'){
-             // document.getElementById("3rd_lost_ptsA").innerHTML= '3rd Ball lost Points:    ' + e.data.substring(3) + '%';
-              //sessionStorage.myValue9 = '3rd Ball lost Points: ' + e.data.substring(3) + '%';
-           // }
-
-           if(e.data.substring(0,3) == 'gwB'){
-              user2.games_won = e.data.substring(3);
-              //console.log(user.games_won);
-
-            }
-            if(e.data.substring(0,3) == 'glB'){
-              user2.games_lost = e.data.substring(3);
-              //console.log(user.games_lost);
-
-            }
-
-
-            if(e.data.substring(0,3) == 'BcB'){
-              user2.Aces = e.data.substring(3);
-             // console.log(user.Aces);
-
-            }
-
-
-            if(e.data.substring(0,3) == 'tpB'){
-              user2.total_points = e.data.substring(3);
-              user.total_points_lost = e.data.substring(3);
-
-
-             // console.log(user.total_points);
-            }
-
-            if(e.data.substring(0,4) == 'fltB'){
-              user2.serve_faults = e.data.substring(4);
-              //console.log(user.serve_faults);
-            }
-
-            if(e.data.substring(0,4) == 'gplB'){
-              user2.game_points_lost = e.data.substring(4);
-             // console.log(user.game_points_lost);
-            }
-
-            if(e.data.substring(0,4) == 'gpwB'){
-              user2.game_points_won = e.data.substring(4);
-              //console.log(user.game_points_lost);
-            }
-
-            if(e.data.substring(0,3) == 'BbB'){
-              user2.air_balls = e.data.substring(3);
-              //console.log(user.air_balls);
-            }
-            
-            if(e.data.substring(0,2) == 'nB'){
-              user2.netpoints = e.data.substring(2);
-             // console.log(user.netpoints);
-              //sessionStorage.myValue1 = 'Netpoints: ' + e.data.substring(2);
-            }
-
-            if(e.data.substring(0,2) == 'sB'){
-              user2.serve_pts =  e.data.substring(2);
-              //console.log(user.serve_pts);
-              //sessionStorage.myValue2 = 'Points from serve: ' + e.data.substring(2) + '%';
-
-            }
-
-            if(e.data.substring(0,3) == 'fsB'){
-              user2.lost_serve_pts  = e.data.substring(3);
-             // sessionStorage.myValue3 = 'Points lost recieving serve: ' + e.data.substring(3) + '%';
-            }
-            
-
-            if(e.data.substring(0,3) == 'atB'){
-              user2.passivity = e.data.substring(3);
-              console.log(user2.passivity)
-              //sessionStorage.myValue4 = 'Airtime Per Return: ' + e.data.substring(3) + ' Seconds';
-            }
-
-            //if(e.data.substring(0,3) == 'lRA'){
-             //user.longest? = e.data.substring(3);
-              //sessionStorage.myValue5 = 'Longest Rally: ' + e.data.substring(3);
-            //}
-
-            if(e.data.substring(0,3) == '2nB'){
-              user2.Snd_ball_pts = e.data.substring(3);
-              //sessionStorage.myValue6 = '2nd Ball Points: ' + e.data.substring(3) + '%';
-            }
-
-            //if(e.data.substring(0,3) == '2lA'){
-              //document.getElementById("2nd_lost_ptsA").innerHTML= '2nd Ball lost Points:    ' + e.data.substring(3) + '%';
-              //sessionStorage.myValue7 = '2nd Ball lost Points: ' + e.data.substring(3) + '%';
-            //}
-
-            if(e.data.substring(0,3) == '3rB'){
-              user2.Trd_ball_pts =  e.data.substring(3);
-              //sessionStorage.myValue8 = '3rd Ball Points: ' + e.data.substring(3) + '%';
-            }
-
-            
-
-
-            if(e.data == 'insert' && user.logged_in == "yes" && user2.logged_in == "yes"){
-              $.ajax({
-                  url: "insert.php",
-                  method: "post",
-                  data: user,
-                  datatype: "text",
-                  success: function(strMessage){
-                    console.log("Messsage back: " + strMessage);
-                  }
-
-              })
-            }
-
-            if(e.data == 'insert' && user2.logged_in == "yes" && user.logged_in == "yes"){
-              $.ajax({
-                  url: "insert.php",
-                  method: "post",
-                  data: user2,
-                  datatype: "text",
-                  success: function(strMessage){
-                    console.log("Messsage back: " + strMessage);
-                  }
-
-              })
-            }
-
-
-
-
-
-
-            /*            
-            var statsB=document.getElementById('statsB');           
-
-            if(e.data == 'displayStatsB'){
-              statsB.style.display = 'none';          
-
-            }
-            
-
-            if(e.data.substring(0,2) == 'nB'){
-              document.getElementById("netpointsB").innerHTML= 'Netpoints:    ' + e.data.substring(2);
-              sessionStorage.myValue10 = 'Netpoints: ' + e.data.substring(2);
-            }
-
-            if(e.data.substring(0,2) == 'sB'){
-              document.getElementById("serve_ptsB").innerHTML= 'Points from serve:    ' + e.data.substring(2) + '%';
-              sessionStorage.myValue11 = 'Points from serve: ' + e.data.substring(2) + '%';
-            }
-
-            if(e.data.substring(0,3) == 'fsB'){
-              document.getElementById("lost_serve_ptsB").innerHTML= 'Points lost recieving serve:   ' + e.data.substring(3) + '%';
-              sessionStorage.myValue12 = 'Points lost recieving serve: ' + e.data.substring(3) + '%';
-            }
-
-            if(e.data.substring(0,3) == 'atB'){
-              document.getElementById("Airtime_returnB").innerHTML= 'Airtime Per Return:    ' + e.data.substring(3) + ' Seconds';
-              sessionStorage.myValue13 = 'Airtime Per Return:    ' + e.data.substring(3) + ' Seconds';
-            }
-
-            if(e.data.substring(0,3) == 'lRB'){
-              document.getElementById("longest_rallyB").innerHTML= 'Longest Rally:    ' + e.data.substring(3);
-              sessionStorage.myValue14 = 'Longest Rally: ' + e.data.substring(3);
-            }
-
-            if(e.data.substring(0,3) == '2nB'){
-              document.getElementById("2nd_ball_ptsB").innerHTML= '2nd Ball Points:     ' + e.data.substring(3) + '%';
-              sessionStorage.myValue15 = '2nd Ball Points: ' + e.data.substring(3) + '%';
-            }
-
-            if(e.data.substring(0,3) == '2lB'){
-              document.getElementById("2nd_lost_ptsB").innerHTML= '2nd Ball lost Points:    ' + e.data.substring(3) + '%';
-              sessionStorage.myValue16 = '2nd Ball lost Points: ' + e.data.substring(3) + '%';
-            }
-
-            if(e.data.substring(0,3) == '3rB'){
-              document.getElementById("3rd_ball_ptsB").innerHTML= '3rd Ball Points:     ' + e.data.substring(3) + '%';
-              sessionStorage.myValue17 = '3rd Ball Points: ' + e.data.substring(3) + '%';
-            }
-
-            if(e.data.substring(0,3) == '3lB'){
-              document.getElementById("3rd_lost_ptsB").innerHTML= '3rd Ball lost Points:    ' + e.data.substring(3) + '%';
-              sessionStorage.myValue18 = '3rd Ball lost Points: ' + e.data.substring(3) + '%';
-            }
-
-
-
-            */
-             
+
+  if(parseInt(score1,10) > parseInt(score1_old,10))
+    audio.play();
+
+  if(parseInt(score2,10) > parseInt(score2_old,10))
+    audio2.play();
+
+ if(e.data == 'insert'){
+    
+      if(user.side == 'left'){
+        A_won += parseInt(user.games_won,10);            
+        B_won += parseInt(user2.games_won,10);
+      }
+      else{
+        B_won += parseInt(user.games_won,10);            
+        A_won += parseInt(user2.games_won,10);
+      }
+ }
+
+
+  
+  document.getElementById("score1").innerHTML= score1;
+
+  document.getElementById("score2").innerHTML= score2;
+
+  if(user.side == 'left'){
+    document.getElementById("game1").innerHTML= A_won;
+    document.getElementById("game2").innerHTML= B_won;
+  }
+  else{
+    document.getElementById("game2").innerHTML= A_won;
+    document.getElementById("game1").innerHTML= B_won; 
+  }          
+
+
+
+ 
+  
+  var circle=document.getElementById('circle');
+  var circle2=document.getElementById('circle2');
+
+   if(substr == 'A'){
+    circle.style.background = '#fff';
+    circle2.style.background = '#b00';
+  }
+   else if(substr == 'B'){
+    circle.style.background = '#00b';
+    circle2.style.background = '#fff';
+
+  }
+
+  var letA=document.getElementById('letA');
+
+
+  if( e.data == 'letA'){
+    letA.style.display = 'inline';
+    audio3.play();
+  }
+  else if(e.data == 'noletA'){
+   // console.log("no let should display!")
+    letA.style.display = 'none';
+  }
+
+  var letB=document.getElementById('letB');
+
+
+  if( e.data == 'letB'){
+    document.getElementById("letB").innerHTML= 'LET';
+    letB.style.display = 'block';
+    audio3.play();
+  }
+  else if(e.data == 'noletB'){
+   // console.log("no let should display!")
+    letB.style.display = 'none';
+  }
+
+  
+  var statsA=document.getElementById('statsA');           
+
+  if(e.data == 'displayStatsA'){
+    button.style.display = 'block';
+    setTimeout(function(){ audio4.play(); }, 2000);
+    
+  }
+
+  if(e.data == 'mercy'){
+
+    setTimeout(function(){ audio8.play(); }, 1500);
+  }
+
+  if(e.data == 'switch'){
+    fliplayers();
+  }
+
+  if(e.data == "logged in" && user.logged_in != "yes" && user2.logged_in != "yes"){
+    session_logged = true;
+    hideSettings();
+  }
+
+
+  if(e.data.substring(0,3) == 'gwA'){
+    user.games_won = e.data.substring(3);
+    //console.log(user.games_won);
+
+  }
+  if(e.data.substring(0,3) == 'glA'){
+    user.games_lost = e.data.substring(3);
+    //console.log(user.games_lost);
+
+  }
+
+
+  if(e.data.substring(0,3) == 'AcA'){
+    user.Aces = e.data.substring(3);
+   // console.log(user.Aces);
+
+  }
+
+
+  if(e.data.substring(0,3) == 'tpA'){
+    user.total_points = e.data.substring(3);
+    user2.total_points_lost = e.data.substring(3);
+  }
+
+  if(e.data.substring(0,4) == 'fltA'){
+    user.serve_faults = e.data.substring(4);
+    //console.log(user.serve_faults);
+  }
+
+  if(e.data.substring(0,4) == 'gplA'){
+    user.game_points_lost = e.data.substring(4);
+   // console.log(user.game_points_lost);
+  }
+
+  if(e.data.substring(0,4) == 'gpwA'){
+    user.game_points_won = e.data.substring(4);
+    //console.log(user.game_points_lost);
+  }
+
+  if(e.data.substring(0,3) == 'AbA'){
+    user.air_balls = e.data.substring(3);
+    //console.log(user.air_balls);
+  }
+  
+  if(e.data.substring(0,2) == 'nA'){
+    user.netpoints = e.data.substring(2);
+   // console.log(user.netpoints);
+    //sessionStorage.myValue1 = 'Netpoints: ' + e.data.substring(2);
+  }
+
+  if(e.data.substring(0,2) == 'sA'){
+    user.serve_pts =  e.data.substring(2);
+    //console.log(user.serve_pts);
+    //sessionStorage.myValue2 = 'Points from serve: ' + e.data.substring(2) + '%';
+
+  }
+
+  if(e.data.substring(0,3) == 'fsA'){
+    user.lost_serve_pts  = e.data.substring(3);
+   // sessionStorage.myValue3 = 'Points lost recieving serve: ' + e.data.substring(3) + '%';
+  }
+  
+
+  if(e.data.substring(0,3) == 'atA'){
+    user.passivity = e.data.substring(3);
+    console.log(user.passivity)
+    //sessionStorage.myValue4 = 'Airtime Per Return: ' + e.data.substring(3) + ' Seconds';
+  }
+
+  //if(e.data.substring(0,3) == 'lRA'){
+   //user.longest? = e.data.substring(3);
+    //sessionStorage.myValue5 = 'Longest Rally: ' + e.data.substring(3);
+  //}
+
+  if(e.data.substring(0,3) == '2nA'){
+    user.Snd_ball_pts = e.data.substring(3);
+    //sessionStorage.myValue6 = '2nd Ball Points: ' + e.data.substring(3) + '%';
+  }
+
+  //if(e.data.substring(0,3) == '2lA'){
+    //document.getElementById("2nd_lost_ptsA").innerHTML= '2nd Ball lost Points:    ' + e.data.substring(3) + '%';
+    //sessionStorage.myValue7 = '2nd Ball lost Points: ' + e.data.substring(3) + '%';
+  //}
+
+  if(e.data.substring(0,3) == '3rA'){
+    user.Trd_ball_pts =  e.data.substring(3);
+    //sessionStorage.myValue8 = '3rd Ball Points: ' + e.data.substring(3) + '%';
+  }
+
+
+
+ // if(e.data.substring(0,3) == '3lA'){
+   // document.getElementById("3rd_lost_ptsA").innerHTML= '3rd Ball lost Points:    ' + e.data.substring(3) + '%';
+    //sessionStorage.myValue9 = '3rd Ball lost Points: ' + e.data.substring(3) + '%';
+ // }
+
+ if(e.data.substring(0,3) == 'gwB'){
+    user2.games_won = e.data.substring(3);
+    //console.log(user.games_won);
+
+  }
+  if(e.data.substring(0,3) == 'glB'){
+    user2.games_lost = e.data.substring(3);
+    //console.log(user.games_lost);
+
+  }
+
+
+  if(e.data.substring(0,3) == 'BcB'){
+    user2.Aces = e.data.substring(3);
+   // console.log(user.Aces);
+
+  }
+
+
+  if(e.data.substring(0,3) == 'tpB'){
+    user2.total_points = e.data.substring(3);
+    user.total_points_lost = e.data.substring(3);
+
+
+   // console.log(user.total_points);
+  }
+
+  if(e.data.substring(0,4) == 'fltB'){
+    user2.serve_faults = e.data.substring(4);
+    //console.log(user.serve_faults);
+  }
+
+  if(e.data.substring(0,4) == 'gplB'){
+    user2.game_points_lost = e.data.substring(4);
+   // console.log(user.game_points_lost);
+  }
+
+  if(e.data.substring(0,4) == 'gpwB'){
+    user2.game_points_won = e.data.substring(4);
+    //console.log(user.game_points_lost);
+  }
+
+  if(e.data.substring(0,3) == 'BbB'){
+    user2.air_balls = e.data.substring(3);
+    //console.log(user.air_balls);
+  }
+  
+  if(e.data.substring(0,2) == 'nB'){
+    user2.netpoints = e.data.substring(2);
+   // console.log(user.netpoints);
+    //sessionStorage.myValue1 = 'Netpoints: ' + e.data.substring(2);
+  }
+
+  if(e.data.substring(0,2) == 'sB'){
+    user2.serve_pts =  e.data.substring(2);
+    //console.log(user.serve_pts);
+    //sessionStorage.myValue2 = 'Points from serve: ' + e.data.substring(2) + '%';
+
+  }
+
+  if(e.data.substring(0,3) == 'fsB'){
+    user2.lost_serve_pts  = e.data.substring(3);
+   // sessionStorage.myValue3 = 'Points lost recieving serve: ' + e.data.substring(3) + '%';
+  }
+  
+
+  if(e.data.substring(0,3) == 'atB'){
+    user2.passivity = e.data.substring(3);
+    console.log(user2.passivity)
+    //sessionStorage.myValue4 = 'Airtime Per Return: ' + e.data.substring(3) + ' Seconds';
+  }
+
+  //if(e.data.substring(0,3) == 'lRA'){
+   //user.longest? = e.data.substring(3);
+    //sessionStorage.myValue5 = 'Longest Rally: ' + e.data.substring(3);
+  //}
+
+  if(e.data.substring(0,3) == '2nB'){
+    user2.Snd_ball_pts = e.data.substring(3);
+    //sessionStorage.myValue6 = '2nd Ball Points: ' + e.data.substring(3) + '%';
+  }
+
+  //if(e.data.substring(0,3) == '2lA'){
+    //document.getElementById("2nd_lost_ptsA").innerHTML= '2nd Ball lost Points:    ' + e.data.substring(3) + '%';
+    //sessionStorage.myValue7 = '2nd Ball lost Points: ' + e.data.substring(3) + '%';
+  //}
+
+  if(e.data.substring(0,3) == '3rB'){
+    user2.Trd_ball_pts =  e.data.substring(3);
+    //sessionStorage.myValue8 = '3rd Ball Points: ' + e.data.substring(3) + '%';
+  }
+
+  
+
+
+  if(e.data == 'insert' && user.logged_in == "yes" && user2.logged_in == "yes"){
+    $.ajax({
+        url: "insert.php",
+        method: "post",
+        data: user,
+        datatype: "text",
+        success: function(strMessage){
+          console.log("Messsage back: " + strMessage);
+        }
+
+    })
+  }
+
+  if(e.data == 'insert' && user2.logged_in == "yes" && user.logged_in == "yes"){
+    $.ajax({
+        url: "insert.php",
+        method: "post",
+        data: user2,
+        datatype: "text",
+        success: function(strMessage){
+          console.log("Messsage back: " + strMessage);
+        }
+
+    })
+  }
       
 
-
-            }
+}
                   
 </script>
 
