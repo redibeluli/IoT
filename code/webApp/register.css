@@ -1,0 +1,88 @@
+body{
+
+	background-image: linear-gradient(to right, rgba(549,159,224,0.7),rgba(2,61,96,0.8)),  url("tt_table.PNG");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	
+}
+
+
+h1{
+	color: white;
+	margin-top: 10px;
+	font-size: 40px;
+
+}
+
+.container{
+	border: black;
+	text-align: center;
+	
+}
+
+.form-container {
+  display: inline-block;
+  max-width: 440px;
+  padding: 5px;
+  margin-top: 1px;
+  border-radius: 5px;
+
+}
+
+.alert-error{
+	border: solid black 1px;
+	width: 100%;
+	height: 28px;
+	background-color: #5e1010;
+	color: #ed4444;
+	vertical-align: middle;
+	padding-top: 10px;
+
+
+    -webkit-box-shadow: 3px 3px 5px 6px #000;
+  	box-shadow: 1px 1px 10px 2px #000;
+  	margin-bottom: 10px;
+    display: none;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=email], .form-container input[type=password]{
+  width: 100%;
+  padding: 6px;
+  margin: 10px 0 10px 0;
+  color: white;
+  background: #14324f;
+  font-size: 19px;
+  font-weight: bold;
+  border-radius: 3px;
+ 
+
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=email]:focus {
+
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #32baff;
+  font-size: 20px;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  margin-top: 15px;
+  border-radius: 4px;
+  opacity: .9;
+
+}
+
+.btn:hover{
+	opacity: 1;
+}
+
+
+
