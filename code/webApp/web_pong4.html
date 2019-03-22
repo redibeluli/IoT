@@ -761,10 +761,11 @@ function showValue(e){
          </div>
 
         <div id="setName">
+          <form onsubmit="submitName();">
           <div id="alert1">*Username/Password incorrect or username same as P2</div>
           <input type="text" id="field1" name="name1" placeholder="Username">
           <input type="password" id="password1" name="password" placeholder="Password" required />
-          <button id="nameBtn" onclick="submitName();">Log In</button> 
+          <button type="submit" id="nameBtn">Log In</button> 
           </form>   
         </div>
 
