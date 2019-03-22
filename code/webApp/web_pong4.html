@@ -2,7 +2,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-//removed
+//removed bs
     
 var ipValue;
 var connection;
@@ -275,54 +275,27 @@ function submitName(){
 
 
 function openName2(){
-if(document.getElementById("setName2").style.display == "block"){
-  document.getElementById("setName2").style.display = "none"; 
+  if(document.getElementById("setName2").style.display == "block"){
+    document.getElementById("setName2").style.display = "none"; 
+  }
+  else
+    if(!session_logged)
+      document.getElementById("setName2").style.display = "block"; 
 }
-else
-  if(!session_logged)
-    document.getElementById("setName2").style.display = "block"; 
-}
 
-function submitName2(){
+//function submitName2(){
 
-  user2.pw = document.getElementById("password2").value;
-  user2.tmp_name = document.getElementById("field2").value;
-
-
-  $.ajax({
-      url: "verify.php",
-      method: "post",
-      data: user2,
-      datatype: "text",
-      success: function(strMessage){
-        console.log("Messsage back: " + strMessage);
-
-
-        if(strMessage == 'match' && document.getElementById("field2").value.toUpperCase() != document.getElementById("p1").innerHTML.toUpperCase() && !session_logged){
-
-          if(document.getElementById("field2").value ||  document.getElementById("field2").value.length > 0){
-            document.getElementById("p2").innerHTML = document.getElementById("field2").value;
-            user2.name = document.getElementById("field2").value;
-            user2.logged_in = "yes";
-          }
-          console.log(user2.name);
-          document.getElementById("alert2").style.display = "none"; 
-          document.getElementById("setName2").style.display = "none";         
-
-      }
-      else{
-        console.log("No matching username/password pair");
-        document.getElementById("alert2").style.display = "block"; 
-      }
-
-    }
-
-  })
+  //user2.pw = document.getElementById("password2").value;
+  //user2.tmp_name = document.getElementById("field2").value;
 
 
 
 
-}
+
+
+
+
+
 
 
 
@@ -761,11 +734,10 @@ function showValue(e){
          </div>
 
         <div id="setName">
-          <form onsubmit="submitName();">
           <div id="alert1">*Username/Password incorrect or username same as P2</div>
           <input type="text" id="field1" name="name1" placeholder="Username">
           <input type="password" id="password1" name="password" placeholder="Password" required />
-          <button type="submit" id="nameBtn">Log In</button> 
+          <button id="nameBtn" onclick="submitName();">Log In</button> 
           </form>   
         </div>
 
@@ -795,12 +767,13 @@ function showValue(e){
          </div>
 
         <div id="setName2">
-          <form onsubmit="submitName2();">
-          <div id="alert2">*Username/Password incorrect or username same as P1</div>
-          <input type="text" id="field2" name="name2" placeholder="Username">
-          <input type="password" id="password2" name="password" placeholder="Password" required />
-          <button type="submit" id="nameBtn2">Log In</button> 
-          </form>   
+          <div id="alert2">*Username/Password incorrect or username same as P2</div>
+          <form id="myForm1" autocomplete="off">
+          <input type="text" id="field2" name="tmp_name" placeholder="Username">
+          <input type="password" id="password2" name="pw" placeholder="Password" required />
+          </form>  
+          <button type="submit" form="myForm1" id="nameBtn2" value="Submit">Log In</button> 
+           
         </div>
 
 
@@ -881,9 +854,45 @@ function showValue(e){
 
 </div>
 
+<script> 
 
-   <script> 
-    
+
+$("#myForm1").submit(function(event){
+  event.preventDefault();
+  console.log("submission");
+ 
+      $.ajax({
+        url: "verify.php",
+        method: "post",
+        data: $('#myForm1').serialize(),
+        datatype: "text",
+        success: function(strMessage){
+          console.log("Messsage back: " + strMessage);
+
+
+          if(strMessage == 'match' && document.getElementById("field2").value.toUpperCase() != document.getElementById("p1").innerHTML.toUpperCase() && !session_logged){
+
+            if(document.getElementById("field2").value ||  document.getElementById("field2").value.length > 0){
+              document.getElementById("p2").innerHTML = document.getElementById("field2").value;
+              user2.name = document.getElementById("field2").value;
+              user2.logged_in = "yes";
+            }
+            console.log(user2.name);
+            document.getElementById("alert2").style.display = "none"; 
+            document.getElementById("setName2").style.display = "none";         
+
+        }
+        else{
+          console.log("No matching username/password pair");
+          document.getElementById("alert2").style.display = "block"; 
+        }
+
+      }
+
+    });
+
+});
+
     mod();
             document.getElementById("score1").innerHTML= '0';
 
